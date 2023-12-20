@@ -38,13 +38,14 @@ exports.fetch_all_users= async (req, res, next) => {
 
 }
 
-exports.login = async (req, res, next) => {
-    try {
-        const { email,password } = req.body;
+exports.login = async (req, res) => {
     
+    try {
+        const { email} = req.body;
+       
         let fetchUser = await db.User.findOne({
             where: {
-                email: email
+                email: email,
             },
             include: [
                 {
@@ -64,7 +65,6 @@ exports.login = async (req, res, next) => {
             ]
         });
        
-         console.log(JSON.stringify(fetchUser))
         if(fetchUser === null){
             return res.json({
                 status: 'failed',
