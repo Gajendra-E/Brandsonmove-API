@@ -3,8 +3,8 @@ module.exports ={
     registerUser: (body)=> {
         return new Promise(async (resolve, reject)=> {
             try {
-                let { email,  password ,first_name, last_name,date_of_birth,gender, user_type } = body;
-               
+                let { email,  password ,first_name, last_name,date_of_birth,gender } = body;
+               let  user_type ="ADM"
                 let  fetchUser = await db.User.findOne({
                     where:{
                         email:email

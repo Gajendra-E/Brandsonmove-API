@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 import userController from '../../controllers/user'
+import { registerUser } from '../../helpers/userHelper'
  import checkAuth from "../../middleware/check-auth";
 
 /*
@@ -11,7 +12,7 @@ import userController from '../../controllers/user'
 */
 router.get("/", checkAuth, userController.fetch_all_users);
 
-
+router.post('/create', userController.createUser);
 /*
   * Method: POST
   * query Parameter: None

@@ -116,6 +116,82 @@ exports.login = async (req, res) => {
     }
 }
 
+exports.createUser = async (req, res) => {
+    
+    try {
+        const { email,  password ,first_name, last_name,date_of_birth,gender } = req.body;
+      
+        let  user_type ="ADM"
+        let  fetchUser = await db.User.findOne({
+            where:{
+                email:email
+            }
+        })
+        if(fetchUser!==null){
+                reject("user already exist");
+        }
+
+        let fetchRole = await db.Role.findOne({
+            where:{
+                code:user_type
+            }
+        })
+        if (fetchRole === null) {
+            reject("Role does not exist");
+        }
+       
+        let newUser = await db.User.create({
+            email: email,
+            password: password !== undefined && password !== null ? password : null,
+            status: 'ACTIVE'
+        });
+        
+        await db.UserRole.create({
+            role_id: fetchRole.id,
+            user_id: newUser.id,
+            status:"ACTIVE"
+        });
+        await db.UserProfile.create({
+            user_id: newUser.id,
+            first_name: first_name,
+            last_name: last_name,
+            email: email,
+            date_of_birth:date_of_birth,
+            gender:gender,
+            status:"ACTIVE"
+        });
+
+        let fetchCreatedUser = await db.User.findOne({
+            where: {
+                id: newUser.id
+            },
+            include: [
+                {
+                    model: db.UserRole,
+                    as: 'userRole',
+                },
+                {
+                    model: db.UserProfile,
+                    as: 'userProfile',
+                }
+            ]
+        }); 
+
+        res.status(200).json({
+            'status':'success',
+            'payload':fetchCreatedUser,
+            'message':'User created successfully'
+        })
+    } catch (error) {
+        res.status(500).json({
+            status: 'failed',
+            payload: {},
+            message: 'Error while logging in'
+        });
+    }
+}
+
+
 
 exports.sendEmail = async (req, res, next) => {
     try {
