@@ -109,6 +109,18 @@ Execute command to add model files
     npx sequelize-cli model:generate --name UserProfile --attributes user_id:integer,first_name:string,last_name:string,email:string,date_of_birth:date,gender:string,status:string
 5.  SiteVisitRequest Table:
     npx sequelize-cli model:generate --name SiteVisitRequest --attributes name:string,company_name:string,date:date,time:time,status:string
+6.  Contents Table:
+    npx sequelize-cli model:generate --name Content --attributes heading1:string,heading2:string,heading3:string,paragraph_content:string,document_link:strig
+7.  MeetingLinks Table:
+    npx sequelize-cli model:generate --name MeetingLink --attributes link:string,pass_code:string
+8.  ContactInfo Table:
+    npx sequelize-cli model:generate --name ManageContactInfo --attributes phone_number:string,alternate_phone_number:string,email:string,address:string
+9.  MeetingRequestedUsers Table:
+    npx sequelize-cli model:generate --name MeetingRequestedUser --attributes name:string,email:string,email:string,company:string,type:string,status:string
+10. InterestedAreas Table:
+    npx sequelize-cli model:generate --name InterestedArea --attributes meeting_requested_user_id:integer,area_name:string,
+11. PreferedDateAndTimeslots Table:
+    npx sequelize-cli model:generate --name PreferedDateAndTimeslot --attributes meeting_requested_user_id:integer,date:date,time:time,status:string
  
 
 To run the application
