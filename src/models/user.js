@@ -21,10 +21,6 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: "user_id",
         as:"userProfile"
       })
-      this.hasMany(models.SiteVisitRequest,{
-        foreignKey: "user_id",
-        as:"siteVisitRequest"
-      })
     }
 
     static authenticate (user, body){

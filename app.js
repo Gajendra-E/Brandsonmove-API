@@ -5,7 +5,6 @@ var logger = require('morgan');
 
 var indexRouter = require('./src/api/routes/index');
 var usersRouter = require('./src/api/routes/users');
-var siteVistRequest = require('./src/api/routes/siteVisitRequests')
 var contentRouter = require('./src/api/routes/content')
 var contactInfoRouter = require('./src/api/routes/contactinfo')
 var meetingLinkRouter = require('./src/api/routes/meetingLink')
@@ -27,7 +26,6 @@ app.use(cors());
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/site-vist-request',siteVistRequest);
 app.use('/content',contentRouter)
 app.use('/contact-info',contactInfoRouter)
 app.use('/meeting-link',meetingLinkRouter)
