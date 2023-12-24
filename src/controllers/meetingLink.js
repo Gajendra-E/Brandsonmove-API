@@ -22,10 +22,11 @@ exports.fetch_all_meeting_links= async(req,res,next)=>{
 
 exports.create_meeting_link=async(req,res,next)=>{
     try{
-        let {link,pass_code}=req.body
+        let {link,pass_code,meeting_type}=req.body
          let newMeetingLink =await db.MeetingLink.create({
+            meeting_type:meeting_type,
             link:link,
-            pass_code:pass_code
+            pass_code:pass_code,
          });
          res.status(200).json({
              'status':'success',
@@ -47,7 +48,7 @@ exports.create_meeting_link=async(req,res,next)=>{
 exports.update_meeting_link= async(req,res,next) =>{
     try{
         let { id } = req.params;
-        let {link,pass_code}=req.body;
+        let {link,pass_code,meeting_type}=req.body;
         let fetchMeetingLink = await db.MeetingLink.findOne({
             where: {
                 id: id

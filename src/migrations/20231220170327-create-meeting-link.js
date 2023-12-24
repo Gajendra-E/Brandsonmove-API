@@ -9,6 +9,10 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
+      meeting_type: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
       link: {
         type: Sequelize.STRING,
         allowNull: false,

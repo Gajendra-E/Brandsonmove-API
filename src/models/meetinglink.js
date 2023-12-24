@@ -15,6 +15,10 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   MeetingLink.init({
+    meeting_type: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
     link: {
       type: DataTypes.STRING,
       allowNull: false,
