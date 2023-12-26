@@ -3,7 +3,7 @@ module.exports ={
     registerUser: (body)=> {
         return new Promise(async (resolve, reject)=> {
             try {
-                let { email,  password ,first_name, last_name,date_of_birth,gender } = body;
+                let {name,phone_number, email,  password  } = body;
                let  user_type ="ADM"
                 let  fetchUser = await db.User.findOne({
                     where:{
@@ -24,6 +24,8 @@ module.exports ={
                 }
                
                 let newUser = await db.User.create({
+                    name:name,
+                    phone_number:phone_number,
                     email: email,
                     password: password !== undefined && password !== null ? password : null,
                     status: 'ACTIVE'
@@ -34,16 +36,7 @@ module.exports ={
                     user_id: newUser.id,
                     status:"ACTIVE"
                 });
-                await db.UserProfile.create({
-                    user_id: newUser.id,
-                    first_name: first_name,
-                    last_name: last_name,
-                    email: email,
-                    date_of_birth:date_of_birth,
-                    gender:gender,
-                    status:"ACTIVE"
-                });
-
+            
                 let fetchCreatedUser = await db.User.findOne({
                     where: {
                         id: newUser.id
@@ -52,10 +45,6 @@ module.exports ={
                         {
                             model: db.UserRole,
                             as: 'userRole',
-                        },
-                        {
-                            model: db.UserProfile,
-                            as: 'userProfile',
                         }
                     ]
                 });

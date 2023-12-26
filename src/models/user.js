@@ -17,10 +17,6 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: "user_id",
         as:"userRole"
       })
-      this.hasOne(models.UserProfile,{
-        foreignKey: "user_id",
-        as:"userProfile"
-      })
     }
 
     static authenticate (user, body){
@@ -43,6 +39,15 @@ module.exports = (sequelize, DataTypes) => {
     };
   };
   User.init({
+
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    phone_number: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
     email: {
       type: DataTypes.STRING,
       allowNull: false,

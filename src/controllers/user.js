@@ -119,7 +119,7 @@ exports.login = async (req, res) => {
 exports.createUser = async (req, res) => {
     
     try {
-        const { email,  password ,first_name, last_name,date_of_birth,gender } = req.body;
+        const { name ,phone_number, email,  password } = req.body;
       
         let  user_type ="ADM"
         let  fetchUser = await db.User.findOne({
@@ -141,6 +141,8 @@ exports.createUser = async (req, res) => {
         }
        
         let newUser = await db.User.create({
+            name:name,
+            phone_number:phone_number,
             email: email,
             password: password !== undefined && password !== null ? password : null,
             status: 'ACTIVE'
@@ -149,15 +151,6 @@ exports.createUser = async (req, res) => {
         await db.UserRole.create({
             role_id: fetchRole.id,
             user_id: newUser.id,
-            status:"ACTIVE"
-        });
-        await db.UserProfile.create({
-            user_id: newUser.id,
-            first_name: first_name,
-            last_name: last_name,
-            email: email,
-            date_of_birth:date_of_birth,
-            gender:gender,
             status:"ACTIVE"
         });
 
@@ -170,10 +163,6 @@ exports.createUser = async (req, res) => {
                     model: db.UserRole,
                     as: 'userRole',
                 },
-                {
-                    model: db.UserProfile,
-                    as: 'userProfile',
-                }
             ]
         }); 
 

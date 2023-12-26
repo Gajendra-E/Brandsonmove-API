@@ -83,8 +83,8 @@ const loadUsers = (workbook) => {
             worksheet.eachRow({ includeEmpty: true }, async (row, rowNumber) => {
                 if (rowNumber > 1) {
                     let userObj = {};
-                    userObj.first_name = row.getCell(1).value;
-                    userObj.last_name = row.getCell(2).value;
+                    userObj.name = row.getCell(1).value;
+                    userObj.phone_number = row.getCell(2).value;
                     userObj.email = row.getCell(3).value;
                     userObj.password = row.getCell(4).value;
                     userObj.user_type = row.getCell(5).value;
