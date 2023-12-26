@@ -10,7 +10,7 @@ import { registerUser } from '../../helpers/userHelper'
   * Return: Return all user array of objects 
   * URl:/user
 */
-router.get("/", checkAuth, userController.fetch_all_users);
+router.get("/",  userController.fetch_all_users);
 
 router.post('/create', userController.createUser);
 /*
