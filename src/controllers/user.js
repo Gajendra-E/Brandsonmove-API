@@ -16,10 +16,6 @@ exports.fetch_all_users= async (req, res, next) => {
                         as: "role",
                     },
                 ],
-            },
-            {
-                model: db.UserProfile,
-                as: 'userProfile',
             }
         ]});
         res.status(200).json({
