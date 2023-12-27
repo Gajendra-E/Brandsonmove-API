@@ -62,7 +62,9 @@ exports.update_meeting_link= async(req,res,next) =>{
         }
         let updateMeetingLink= await db.MeetingLink.update({
             link:link,
-           pass_code:pass_code
+           pass_code:pass_code,
+           meeting_type:meeting_type
+           
         },{
             where: {
                 id: id
