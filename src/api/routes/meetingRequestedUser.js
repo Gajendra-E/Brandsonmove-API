@@ -5,6 +5,6 @@ var meetingRequestController =require('../../controllers/meetingRequestedUser')
 
 router.get('/',  meetingRequestController.fetch_all_meeting_request)
 router.post('/',  meetingRequestController.create_meeting_requset)
-
+router.put('/:meetingRequestUserId',  meetingRequestController.update_meeting_request_status)
 
 module.exports = router;

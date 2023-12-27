@@ -9,6 +9,7 @@ var contentRouter = require('./src/api/routes/content')
 var contactInfoRouter = require('./src/api/routes/contactinfo')
 var meetingLinkRouter = require('./src/api/routes/meetingLink')
 var meetingRequestedUserRouter = require('./src/api/routes/meetingRequestedUser')
+var  preferedMeetingTimeSlotRoute = require('./src/api/routes/preferedMeetingTimeSlot')
 
 const http = require('http');
 var app = express();
@@ -30,6 +31,7 @@ app.use('/content',contentRouter)
 app.use('/contact-info',contactInfoRouter)
 app.use('/meeting-link',meetingLinkRouter)
 app.use('/meeting-requested-user',meetingRequestedUserRouter)
+app.use('/meeting-time-slot',preferedMeetingTimeSlotRoute)
 
 server.listen(port, () => {
     console.log("Backend Server is running on http://localhost:" + port);

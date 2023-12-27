@@ -94,6 +94,53 @@ exports.create_meeting_requset=async(req,res,next)=>{
             message: 'Error while logging in'
         });
     }
-    
+   
 }
+
+exports.update_meeting_request_status= async(req,res,next) =>{
+    try{
+        let { meetingRequestUserId } = req.params;
+        let {status}=req.body;
+        let fetchMeetingRequestUser = await db.MeetingRequestedUser.findOne({
+            where: {
+                id: meetingRequestUserId
+            }
+        });
+        if(fetchMeetingRequestUser===null){
+            res.json({
+                "status":"failed",
+                "message":"fetchMeetingRequestUser failed"
+            })
+        }
+        let updateMeetingRequestUser= await db.MeetingRequestedUser.update({
+            name:fetchMeetingRequestUser.name,
+            email:fetchMeetingRequestUser.email,
+            company:fetchMeetingRequestUser.company,
+            type:fetchMeetingRequestUser.type,
+            status:status
+           
+        },{
+            where: {
+                id: meetingRequestUserId
+            },
+            returning: true
+        }
+        )
+        let fetchMeetingRequestUsers = updateMeetingRequestUser[1].length > 0 ? (updateMeetingRequestUser[1])[0] : null;
+        res.status(200).json({
+            'status':'success',
+            'payload':fetchMeetingRequestUsers,
+            'message':'fetchMeetingRequestUsers updated successfully'
+        })
+
+    }catch(error) {
+        console.log("Error=====>"+error)
+        res.status(500).json({
+            'status':'failed',
+            'payload':{},
+            'message':'PreferedDateAndTimeslot failed to update'
+        })
+    }
+}
+
 
