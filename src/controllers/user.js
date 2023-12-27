@@ -37,17 +37,13 @@ exports.fetch_all_users= async (req, res, next) => {
 exports.login = async (req, res) => {
     
     try {
-        const { email} = req.body;
+        const { email,password} = req.body;
        
         let fetchUser = await db.User.findOne({
             where: {
                 email: email,
             },
             include: [
-                {
-                    model: db.UserProfile,
-                    as: 'userProfile'
-                },
                 {
                     model: db.UserRole,
                     as: 'userRole',
@@ -60,7 +56,7 @@ exports.login = async (req, res) => {
                 }
             ]
         });
-       
+      
         if(fetchUser === null){
             return res.json({
                 status: 'failed',
@@ -76,9 +72,9 @@ exports.login = async (req, res) => {
 
             let userObj = {};
             userObj.user_id = fetchUser.id;
-            userObj.first_name = fetchUser.userProfile.first_name;
-            userObj.last_name = fetchUser.userProfile.last_name;
+            userObj.name =fetchUser.name
             userObj.email =fetchUser.email;
+            userObj.phone_number =fetchUser.phone_number
             userObj.user_type = fetchUser.userRole.role.code;
             userObj.user_role_name = fetchUser.userRole.role.name;
           
