@@ -65,7 +65,7 @@ module.exports = {
         if(data.approvedtimeslot) {
             htmlContent = htmlContent + `
             <p>
-                <b>Date: </b> ${convertToDate(data.approvedtimeslot)} - <b>Time:</b> ${convertToTime(data.approvedtimeslot)}
+                <b>Date: </b> ${data.approvedtimeslot.date} - <b>Time:</b> ${data.approvedtimeslot.time}
             </p>`;
         }
 

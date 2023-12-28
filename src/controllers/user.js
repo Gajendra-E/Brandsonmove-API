@@ -120,7 +120,10 @@ exports.createUser = async (req, res) => {
             }
         })
         if(fetchUser!==null){
-                reject("user already exist");
+               return res.status(500).json({
+                    'status':"failed",
+                    'message':"user already exist"
+                })
         }
 
         let fetchRole = await db.Role.findOne({
@@ -129,7 +132,10 @@ exports.createUser = async (req, res) => {
             }
         })
         if (fetchRole === null) {
-            reject("Role does not exist");
+           return res.status(500).json({
+                'status':'failed',
+                'message':'Role does not exist'
+            })
         }
        
         let newUser = await db.User.create({
@@ -158,16 +164,16 @@ exports.createUser = async (req, res) => {
             ]
         }); 
 
-        res.status(200).json({
+       return res.status(200).json({
             'status':'success',
             'payload':fetchCreatedUser,
             'message':'User created successfully'
         })
     } catch (error) {
-        res.status(500).json({
+        return res.status(500).json({
             status: 'failed',
             payload: {},
-            message: 'Error while logging in'
+            message: 'Error while creating user'
         });
     }
 }
@@ -176,19 +182,18 @@ exports.createUser = async (req, res) => {
 
 exports.sendEmail = async (req, res, next) => {
     try {
-    
          await Email.send_email(req.body)
-         res.status(200).json({
+         return  res.status(200).json({
             status: 'success',
             message: 'Email sent successfully'
-        });
+        }); 
     
       
     } catch (error) {
-        res.status(500).json({
+       return res.status(500).json({
             status: 'failed',
             payload: {},
-            message: 'Error while logging in'
+            message: 'Error while sending email'
         });
     }
 }

@@ -22,6 +22,6 @@ router.post('/create', userController.createUser);
 */
 router.post('/login', userController.login);
 
-router.post('/sendemail', userController.sendEmail)
+router.post('/send-email', userController.sendEmail)
 
 module.exports = router;
