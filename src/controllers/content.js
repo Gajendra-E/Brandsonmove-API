@@ -91,3 +91,41 @@ exports.update_content= async(req,res,next) =>{
         })
     }
 }
+
+exports.delete_content = async (req, res) => {
+    let id = req.params.id
+    try {
+        let fetchContent = await db.Content.findOne({
+            where: {
+                id: id
+            }
+        });
+
+        if (fetchContent === null) {
+            return res.json({
+                status: 'failed',
+                payload: null,
+                message: 'Error while fetching Content'
+            });
+        }
+
+        await db.Content.destroy({
+            where: {
+                id: fetchContent.id
+            }
+        })
+
+        res.status(200).json({
+            status: 'success',
+            payload: null,
+            message: 'Content deleted successfully'
+        });
+    }
+    catch (error) {
+        console.log("Error at Content delete method- DELETE /:id:" + error);
+        res.status(500).json({
+            status: 'failed',
+            message: error
+        });
+    }
+}

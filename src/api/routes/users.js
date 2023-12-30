@@ -24,4 +24,7 @@ router.post('/login', userController.login);
 
 router.post('/send-email', userController.sendEmail)
 
+//Delete user
+router.delete('/:id',userController.deleteUser)
+
 module.exports = router;

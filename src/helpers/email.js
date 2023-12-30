@@ -34,9 +34,11 @@ send_email: async function(body) {
         },    
     });
 
+   
     let message = {
         from: '"Fred Foo 👻" <rayapurv59@gmail.com>', // sender address
-        to: body.email, // list of receivers
+        to: body.toemail, // list of receivers
+        cc: body.ccemails,
         subject: "Hello ✔", // Subject line
         text: "Successfully Register with us.", // plain text body
         html:  Utils.createEmailTemplate(body), // html body
