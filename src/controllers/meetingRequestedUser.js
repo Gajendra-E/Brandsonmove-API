@@ -32,10 +32,15 @@ exports.fetch_all_meeting_request= async(req,res,next)=>{
 }
 
 exports.create_meeting_requset=async(req,res,next)=>{
+   
 
     try {
 
         const { name,  email ,company, interested_areas,type,preferedDateAndTimeslots } = req.body;
+
+        const socket = req.app.get('socket')
+    
+ 
       
         let newMeetingRequestedUser = await db.MeetingRequestedUser.create({
             name:name,
@@ -81,6 +86,8 @@ exports.create_meeting_requset=async(req,res,next)=>{
                 }
             ]
         }); 
+
+        socket.emit("meeting-requested-user");
 
         res.status(200).json({
             'status':'success',
