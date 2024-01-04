@@ -34,10 +34,9 @@ send_email: async function(body) {
         },    
     });
 
-   
     let message = {
         from: '"Fred Foo 👻" <rayapurv59@gmail.com>', // sender address
-        to: body.toemail, // list of receivers
+        to: body.isadminnotificationemail===true?"rayapurv59@gmail.com":body.email, // list of receivers
         cc: body.ccemails,
         subject: "Hello ✔", // Subject line
         text: "Successfully Register with us.", // plain text body

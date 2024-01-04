@@ -11,24 +11,33 @@ module.exports = {
             <br />
         `;
 
-        if(data.preferreddatetime1) {
-            htmlContent = htmlContent + `
-            <p>
-                <b>Date: </b> ${convertToDate(data.preferreddatetime1)} - <b>Time:</b> ${convertToTime(data.preferreddatetime1)}
-            </p>`;
-        }
-        if(data.preferreddatetime2) {
-            htmlContent = htmlContent + `
-            <p>
-                <b>Date: </b> ${convertToDate(data.preferreddatetime2)} - <b>Time:</b> ${convertToTime(data.preferreddatetime2)}
-            </p>`;
-        }
-        if(data.preferreddatetime3) {
-            htmlContent = htmlContent + `
-            <p>
-                <b>Date: </b> ${convertToDate(data.preferreddatetime3)} - <b>Time:</b> ${convertToTime(data.preferreddatetime3)}
-            </p>`;
-        }
+        if(data.preferedDateAndTimeslots.length>0){
+            data.preferedDateAndTimeslots.forEach(element => {
+                htmlContent = htmlContent + `
+                <p>
+                    <b>Date: </b> ${convertToDate(element.date)} - <b>Time:</b> ${element.time}
+                </p>`;
+            
+        });
+    }
+        // if(data.preferreddatetime1) {
+        //     htmlContent = htmlContent + `
+        //     <p>
+        //         <b>Date: </b> ${convertToDate(data.preferreddatetime1)} - <b>Time:</b> ${convertToTime(data.preferreddatetime1)}
+        //     </p>`;
+        // }
+        // if(data.preferreddatetime2) {
+        //     htmlContent = htmlContent + `
+        //     <p>
+        //         <b>Date: </b> ${convertToDate(data.preferreddatetime2)} - <b>Time:</b> ${convertToTime(data.preferreddatetime2)}
+        //     </p>`;
+        // }
+        // if(data.preferreddatetime3) {
+        //     htmlContent = htmlContent + `
+        //     <p>
+        //         <b>Date: </b> ${convertToDate(data.preferreddatetime3)} - <b>Time:</b> ${convertToTime(data.preferreddatetime3)}
+        //     </p>`;
+        // }
 
         htmlContent = htmlContent + `
             <br />
@@ -125,9 +134,20 @@ module.exports = {
             </p>
         `;
         return htmlContent;
+        
     }
 
 }
 
     }
+
 }
+
+const convertToDate = (date) => {
+    const timestamp = new Date(date);
+    const date1 = timestamp.getDate();
+    const month = timestamp.toLocaleString('default', { month: 'long' });
+    const year = timestamp.getFullYear();
+    return `${date1}, ${month}-${year}`;
+}
+

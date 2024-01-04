@@ -22,6 +22,9 @@ exports.fetch_all_contact_infos= async(req,res,next)=>{
 
 exports.create_contact_info=async(req,res,next)=>{
     try{
+        
+        const socket = req.app.get('socket')
+
         let {phone_number,alternate_phone_number,email,address}=req.body
          let newManageContactInfo =await db.ManageContactInfo.create({
             phone_number:phone_number,
@@ -29,6 +32,7 @@ exports.create_contact_info=async(req,res,next)=>{
             email: email,
             address:address,
          });
+         socket.emit("contact-info");
          res.status(200).json({
              'status':'success',
              'payload':newManageContactInfo,
@@ -48,6 +52,7 @@ exports.create_contact_info=async(req,res,next)=>{
 
 exports.update_contact_info= async(req,res,next) =>{
     try{
+        const socket = req.app.get('socket')
         let { id } = req.params;
         let {phone_number,alternate_phone_number,email,address}=req.body;
         let fetchManageContactInfo = await db.ManageContactInfo.findOne({
@@ -74,6 +79,7 @@ exports.update_contact_info= async(req,res,next) =>{
         }
         )
         let fetchUpdateManageContactInfos = updateManageContactInfo[1].length > 0 ? (updateManageContactInfo[1])[0] : null;
+        socket.emit("contact-info");
         res.status(200).json({
             'status':'success',
             'payload':fetchUpdateManageContactInfos,
