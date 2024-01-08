@@ -19,7 +19,7 @@ send_email: async function(body) {
 
     let message = {
         from: config.EMAIL, // sender address
-        to: body.isadminnotificationemail===true?"gajendragaja141@gmail.com":body.toemail, // list of receivers
+        to: body.isadminnotificationemail===true?config.EMAIL:body.toemail, // list of receivers
         cc: body.ccemails,
         subject: "Inivitation mail.",
         html:  Utils.createEmailTemplate(body), // html body
