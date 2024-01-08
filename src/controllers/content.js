@@ -1,4 +1,5 @@
-var db = require("../models");
+const db = require("../models");
+
 
 exports.fetch_all_contents= async(req,res,next)=>{
     try{
@@ -21,6 +22,12 @@ exports.fetch_all_contents= async(req,res,next)=>{
 }
 
 exports.create_content=async(req,res,next)=>{
+    var tmp_path = null
+
+    if(req.file!=undefined || req.file!=null){
+        var tmp_path = req.file.filename;
+    }
+
     try{
         let {heading1,heading2,heading3,paragraph_content,document_link}=req.body
          let newContent =await db.Content.create({
@@ -28,7 +35,8 @@ exports.create_content=async(req,res,next)=>{
             heading2:heading2,
             heading3:heading3,
             paragraph_content:paragraph_content,
-            document_link:document_link
+            document_link:document_link,
+            attachment_file:tmp_path
          });
          res.status(200).json({
              'status':'success',

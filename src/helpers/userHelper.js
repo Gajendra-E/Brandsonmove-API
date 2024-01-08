@@ -1,4 +1,5 @@
-import db from '../models'
+var db = require('../models')
+
 module.exports ={
     registerUser: (body)=> {
         return new Promise(async (resolve, reject)=> {

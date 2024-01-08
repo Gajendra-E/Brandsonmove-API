@@ -1,5 +1,5 @@
-import jwt from "jsonwebtoken";
-import db from "../models/index";
+var jwt = require("jsonwebtoken");
+var db =  require("../models/index");
 require('dotenv').config();
 
 module.exports = async (req, res, next)=> {

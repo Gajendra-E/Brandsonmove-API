@@ -33,7 +33,11 @@ module.exports = (sequelize, DataTypes) => {
     },
     document_link: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
+    },
+    attachment_file:{
+      type: DataTypes.STRING,
+      allowNull: true,
     },
   }, {
     sequelize,

@@ -3,9 +3,9 @@ var argv = require("yargs")
 	.command("master", "Load DB", function (yargs) { })
 	.help("help").argv;
 var command = argv._[0];
-import Excel from "exceljs";
-import db from "../src/models";
-import { registerUser } from '../src/helpers/userHelper'
+var Excel = require("exceljs");
+var db  = require("../src/models");
+const { registerUser } =require('../src/helpers/userHelper')
 
 const loadMasterTable = () => {
 	return new Promise(async (resolve, reject) => {

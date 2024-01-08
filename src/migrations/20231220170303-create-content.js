@@ -27,7 +27,11 @@ module.exports = {
       },
       document_link: {
         type: Sequelize.STRING,
-        allowNull: false,
+        allowNull: true,
+      },
+      attachment_file:{
+        type: Sequelize.STRING,
+        allowNull: true,
       },
       createdAt: {
         allowNull: false,

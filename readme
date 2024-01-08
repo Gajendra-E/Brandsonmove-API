@@ -127,6 +127,5 @@ To run the application
 ====================================
     1.  > npx sequelize-cli db:create
     2.  > npx sequelize-cli db:migrate
-    3.  > npm run build 
-    4.  > node ./dist/data/loadData.js master ./dist/data/full_stack_app.xlsx 
+    3.  > node ./data/loadData.js master ./data/full_stack_app.xlsx 
     5.  > npm start  
