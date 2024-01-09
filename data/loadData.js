@@ -12,7 +12,7 @@ const loadMasterTable = () => {
 		console.log("-----===================")
 		try {
             let workbook = new Excel.Workbook();
-			await workbook.xlsx.readFile('./dist/data/full_stack_app.xlsx')
+			await workbook.xlsx.readFile('./data/full_stack_app.xlsx')
 			console.log("\n================== Master tables started loading ====================\n");
 			let postRoles = await loadRoles(workbook);
 			console.log(postRoles);
