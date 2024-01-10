@@ -64,18 +64,18 @@ router.put('/:id',  async function(req,res,next){
             })
         }
         let updateMeetingLink= await db.MeetingLink.update({
-            link:link,
+           meeting_type:meeting_type,
+           link:link,
            pass_code:pass_code,
-           meeting_type:meeting_type
            
         },{
             where: {
                 id: id
             },
-            returning: true
+             returning: true
         }
         )
-        let fetcUpdateMeetingLinks = updateMeetingLink[1].length > 0 ? (updateMeetingLink[1])[0] : null;
+        let fetcUpdateMeetingLinks = await db.MeetingLink.findOne({id:id})
         res.status(200).json({
             'status':'success',
             'payload':fetcUpdateMeetingLinks,

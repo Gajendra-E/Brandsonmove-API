@@ -31,7 +31,8 @@ router.put('/:timeSlotId',  async function(req,res,next){
             returning: true
         }
         )
-        let fetchPreferedDateAndTimeslots = updatePreferedDateAndTimeslot[1].length > 0 ? (updatePreferedDateAndTimeslot[1])[0] : null;
+        
+        const fetchPreferedDateAndTimeslots = await db.PreferedDateAndTimeslot.findAll({meeting_requested_user_id:fetchPreferedDateAndTimeslot.meeting_requested_user_id})
         res.status(200).json({
             'status':'success',
             'payload':fetchPreferedDateAndTimeslots,
