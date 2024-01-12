@@ -31,8 +31,7 @@ router.put('/:timeSlotId',  async function(req,res,next){
             returning: true
         }
         )
-        
-        const fetchPreferedDateAndTimeslots = await db.PreferedDateAndTimeslot.findAll({meeting_requested_user_id:fetchPreferedDateAndTimeslot.meeting_requested_user_id})
+        const fetchPreferedDateAndTimeslots = await db.PreferedDateAndTimeslot.findAll({where:{meeting_requested_user_id:fetchPreferedDateAndTimeslot.meeting_requested_user_id}})
         res.status(200).json({
             'status':'success',
             'payload':fetchPreferedDateAndTimeslots,
