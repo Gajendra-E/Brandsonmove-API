@@ -7,7 +7,7 @@ const config = require('./constants')
 module.exports = {
 // create reusable transport method (opens pool of SMTP connections)
 send_email: async function(body) {  
-   
+ 
     // create reusable transporter object using the default SMTP transport
     let transporter = nodemailer.createTransport({
         service : 'gmail',
@@ -27,7 +27,7 @@ send_email: async function(body) {
 
     if(body.attachment_file){
         message.attachments = [{
-            path:`${config.BACK_END_URL}/{body.attachment_file}`
+            path:`http://localhost:3000/uploads/${body.attachment_file}`
         }]
 
     }
