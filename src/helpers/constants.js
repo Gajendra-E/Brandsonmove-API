@@ -1,8 +1,9 @@
+require('dotenv').config();
 
 const config = {
-    EMAIL: "rayapurv59@gmail.com",
-    PASSWORD:"piwhdkiqgsgvbmuv",
-    BACK_END_URL:"http://localhost:3000"
+    EMAIL: process.env.EMAIL,
+    PASSWORD:process.env.PASSWORD,
+    BACK_END_URL:process.env.BACK_END_URL
   };
   
   module.exports = config;

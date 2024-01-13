@@ -3,7 +3,7 @@ var router = express.Router();
 var db = require('../../models');
 var checkAuth = require('../../middleware/check-auth')
 
-router.get('/',  async function(req,res,next){
+router.get('/',  async function(req,res){
     try{
         let fetchAllManageContactInfos= await db.ManageContactInfo.findAll();
         res.status(200).json({
@@ -23,7 +23,7 @@ router.get('/',  async function(req,res,next){
     }
 })
 
-router.post('/',  async function(req,res,next){
+router.post('/',  async function(req,res){
     try{
         
         const socket = req.app.get('socket')
@@ -53,7 +53,7 @@ router.post('/',  async function(req,res,next){
     }
 })
 
-router.put('/:id', async function(req,res,next) {
+router.put('/:id', async function(req,res) {
     try{
         const socket = req.app.get('socket')
         let { id } = req.params;

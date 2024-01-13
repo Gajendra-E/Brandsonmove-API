@@ -31,10 +31,6 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    document_link: {
-      type: DataTypes.STRING,
-      allowNull: true,
-    },
     attachment_file:{
       type: DataTypes.STRING,
       allowNull: true,

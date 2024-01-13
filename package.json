@@ -1,10 +1,10 @@
 {
-  "name": "fullstack-app-api",
+  "name": "brandsonmove-app-api",
   "version": "0.0.0",
   "private": true,
   "scripts": {
     "start": "nodemon ./app.js",
-    "build": "rimraf dist/ && babel ./ -d dist --ignore node_modules,.babelrc,package.json,package-lock.json,npm-debug.log --copy-files"
+    "build": "npm install && npx sequelize-cli db:create && npx sequelize-cli db:migrate && node ./data/loadData.js master ./data/brandsonmove_app.xlsx"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",

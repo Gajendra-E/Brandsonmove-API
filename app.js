@@ -10,7 +10,7 @@ const contentRouter = require('./src/api/routes/content')
 const contactInfoRouter = require('./src/api/routes/contactinfo')
 const meetingLinkRouter = require('./src/api/routes/meetingLink')
 const meetingRequestedUserRouter = require('./src/api/routes/meetingRequestedUser')
-const  preferedMeetingTimeSlotRoute = require('./src/api/routes/preferedMeetingTimeSlot')
+const preferedMeetingTimeSlotRoute = require('./src/api/routes/preferedMeetingTimeSlot')
 
 const http = require('http');
 const app = express();
@@ -30,37 +30,33 @@ app.use('/uploads', express.static('uploads'));
 app.use(cors());
 
 io.on("connection", (socket) => {
-  
-    console.log("New User connected");
-    
+  console.log("New User connected");
   // Set the socket in the app for use in controllers
   app.set('socket', socket);
-
-    
-    socket.on("disconnect", () => {
-      console.log("User disconnected");
-    });
+  socket.on("disconnect", () => {
+    console.log("User disconnected");
   });
+});
 
 
-  // Use the controllers with a middleware to set the socket in every request
+// Use the controllers with a middleware to set the socket in every request
 app.use((req, res, next) => {
-    req.app.set('socket', io);
-    next();
-  });
-  
+  req.app.set('socket', io);
+  next();
+});
+
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/content',contentRouter)
-app.use('/contact-info',contactInfoRouter)
-app.use('/meeting-link',meetingLinkRouter)
-app.use('/meeting-requested-user',meetingRequestedUserRouter)
-app.use('/meeting-time-slot',preferedMeetingTimeSlotRoute)
+app.use('/content', contentRouter)
+app.use('/contact-info', contactInfoRouter)
+app.use('/meeting-link', meetingLinkRouter)
+app.use('/meeting-requested-user', meetingRequestedUserRouter)
+app.use('/meeting-time-slot', preferedMeetingTimeSlotRoute)
 
 
 server.listen(port, () => {
-    console.log("Backend Server is running on http://localhost:" + port);
+  console.log("Backend Server is running on http://localhost:" + port);
 });
 
 module.exports = app;

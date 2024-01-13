@@ -9,10 +9,9 @@ const { registerUser } =require('../src/helpers/userHelper')
 
 const loadMasterTable = () => {
 	return new Promise(async (resolve, reject) => {
-		console.log("-----===================")
 		try {
             let workbook = new Excel.Workbook();
-			await workbook.xlsx.readFile('./data/full_stack_app.xlsx')
+			await workbook.xlsx.readFile('./data/brandsonmove_app.xlsx')
 			console.log("\n================== Master tables started loading ====================\n");
 			let postRoles = await loadRoles(workbook);
 			console.log(postRoles);
@@ -28,7 +27,6 @@ const loadMasterTable = () => {
 }
 
 const loadRoles = (workbook) => {
-	console.log("jjjjjjjjjjjjjjjj---------------")
 	return new Promise((resolve, reject) => {
 		let worksheet = workbook.getWorksheet("userRole");
 		let lastRow = worksheet.lastRow;
