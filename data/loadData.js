@@ -17,6 +17,10 @@ const loadMasterTable = () => {
 			console.log(postRoles);
 			let postUsers = await loadUsers(workbook);
 			console.log(postUsers);
+			let postMeetingLinks = await loadMeetingLinks(workbook);
+			console.log(postMeetingLinks);
+			let postContactInfo = await loadContactInfo(workbook);
+			console.log(postContactInfo);
 			console.log("==================Master tables loaded====================");
 			resolve("Success");
 			process.exit(0);
@@ -104,6 +108,80 @@ const loadUsers = (workbook) => {
         }
     });
 }
+
+const loadMeetingLinks = (workbook) => {
+	return new Promise((resolve, reject) => {
+		let worksheet = workbook.getWorksheet("meetinglinks");
+		let lastRow = worksheet.lastRow;
+		let isRejected = false;
+		let meetingLinkArray = [];
+		let existMeetingLinkData = 0;
+		try {
+			worksheet.eachRow({ includeEmpty: true }, async (row, rowNumber) => {
+				if (rowNumber > 1) {
+					let meetingLinkObj = {};
+					meetingLinkObj.meeting_type = row.getCell(1).value;
+					meetingLinkObj.link = row.getCell(2).value;
+					meetingLinkObj.pass_code = row.getCell(3).value;
+					meetingLinkArray.push(meetingLinkObj);
+					if (row === lastRow) {
+						if (!isRejected === true) {
+							for (let meetingLinkObj of meetingLinkArray) {
+								await db.MeetingLink.create({
+									meeting_type:meetingLinkObj.meeting_type,
+									link: meetingLinkObj.link,
+									pass_code: meetingLinkObj.pass_code,
+								});
+							}
+							let message = existMeetingLinkData === meetingLinkArray.length ? "meetingLinkArray data already exist" : existMeetingLinkData === 0 ? "Meeting link data loaded successfully" : `${(meetingLinkArray.length - existMeetingLinkData)}/${meetingLinkArray.length} Meeting link data loaded successfully`
+							resolve(message);
+						}
+					}
+				}
+			});
+		} catch (error) {
+			console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!===> " + error);
+		}
+	});
+};
+
+const loadContactInfo = (workbook) => {
+	return new Promise((resolve, reject) => {
+		let worksheet = workbook.getWorksheet("managecontactinfos");
+		let lastRow = worksheet.lastRow;
+		let isRejected = false;
+		let contactInfoArray = [];
+		let exitContactInfoData = 0;
+		try {
+			worksheet.eachRow({ includeEmpty: true }, async (row, rowNumber) => {
+				if (rowNumber > 1) {
+					let contactInfoObj = {};
+					contactInfoObj.phone_number = row.getCell(1).value;
+					contactInfoObj.alternate_phone_number = row.getCell(2).value;
+					contactInfoObj.email = row.getCell(3).value;
+					contactInfoObj.address= row.getCell(4).value;
+					contactInfoArray.push(contactInfoObj);
+					if (row === lastRow) {
+						if (!isRejected === true) {
+							for (let contactInfoObj of contactInfoArray) {
+								await db.ManageContactInfo.create({
+									phone_number:contactInfoObj.phone_number,
+									alternate_phone_number: contactInfoObj.alternate_phone_number,
+									email: contactInfoObj.email,
+									address: contactInfoObj.address,
+								});
+							}
+							let message = exitContactInfoData === contactInfoArray.length ? "contactInfo data already exist" : exitContactInfoData === 0 ? "Contact info data loaded successfully" : `${(contactInfoArray.length - exitContactInfoData)}/${contactInfoArray.length} Meeting link data loaded successfully`
+							resolve(message);
+						}
+					}
+				}
+			});
+		} catch (error) {
+			console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!===> " + error);
+		}
+	});
+};
 
 if (command === "master") {
 	try {
