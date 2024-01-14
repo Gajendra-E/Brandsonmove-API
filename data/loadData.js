@@ -21,6 +21,9 @@ const loadMasterTable = () => {
 			console.log(postMeetingLinks);
 			let postContactInfo = await loadContactInfo(workbook);
 			console.log(postContactInfo);
+			let postContents = await loadContents(workbook);
+			console.log(postContents);
+			
 			console.log("==================Master tables loaded====================");
 			resolve("Success");
 			process.exit(0);
@@ -172,6 +175,46 @@ const loadContactInfo = (workbook) => {
 								});
 							}
 							let message = exitContactInfoData === contactInfoArray.length ? "contactInfo data already exist" : exitContactInfoData === 0 ? "Contact info data loaded successfully" : `${(contactInfoArray.length - exitContactInfoData)}/${contactInfoArray.length} Meeting link data loaded successfully`
+							resolve(message);
+						}
+					}
+				}
+			});
+		} catch (error) {
+			console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!===> " + error);
+		}
+	});
+};
+
+const loadContents = (workbook) => {
+	return new Promise((resolve, reject) => {
+		let worksheet = workbook.getWorksheet("contents");
+		let lastRow = worksheet.lastRow;
+		let isRejected = false;
+		let contentArray = [];
+		let exitContentData = 0;
+		try {
+			worksheet.eachRow({ includeEmpty: true }, async (row, rowNumber) => {
+				if (rowNumber > 1) {
+					let contentObj = {};
+					contentObj.heading1 = row.getCell(1).value;
+					contentObj.heading2 = row.getCell(2).value;
+					contentObj.heading3 = row.getCell(3).value;
+					contentObj.paragraph_content= row.getCell(4).value;
+					contentObj.attachment_file =row.getCell(5).value;
+					contentArray.push(contentObj);
+					if (row === lastRow) {
+						if (!isRejected === true) {
+							for (let contentObj of contentArray) {
+								await db.Content.create({
+									heading1:contentObj.heading1,
+									heading2: contentObj.heading2,
+									heading3: contentObj.heading3,
+									paragraph_content: contentObj.paragraph_content,
+									attachment_file: contentObj.attachment_file,
+								});
+							}
+							let message = exitContentData === contentArray.length ? "Content data already exist" : exitContentData === 0 ? "Content data loaded successfully" : `${(contentArray.length - exitContentData)}/${contentArray.length} Content data loaded successfully`
 							resolve(message);
 						}
 					}
