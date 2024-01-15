@@ -73,7 +73,7 @@ Alter config.json file
             "development": {
                 "username": "root",
                 "password": "password",
-                "database":  "full_stack_app_db",
+                "database":  "brandsonmove_api_app_db",
                 "host": "127.0.0.1",
                 "dialect": "mysql",
                 "logging": false
@@ -81,7 +81,7 @@ Alter config.json file
             "test": {
                 "username": "root",
                 "password": "password",
-                "database":  "full_stack_app_db",
+                "database":  "brandsonmove_api_app_db",
                 "host": "127.0.0.1",
                 "dialect": "mysql",
                 "logging": false
@@ -89,7 +89,7 @@ Alter config.json file
             "production": {
                 "username": "root",
                 "password": "password",
-                "database":  "full_stack_app_db",
+                "database":  "brandsonmove_api_app_db",
                 "host": "127.0.0.1",
                 "dialect": "mysql",
                 "logging": false
