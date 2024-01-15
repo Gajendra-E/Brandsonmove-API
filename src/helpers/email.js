@@ -24,11 +24,21 @@ module.exports = {
             html: Utils.createEmailTemplate(body), // html body
         }
 
+        if(body.isusernotificationemail){
+            message.subject = `Invitation for a meeting on ${convertToDate(body.approvedtimeslot.date)} and ${body.approvedtimeslot.time}`
+        }
+        if(body.isinvitedeclineemail){
+            message.subject = "Regret our prior engagement on your preferred time slots"
+        }
+        if(body.ismeetingcompleteemail){
+            message.subject = "Thank you for your time and discussion"
+        }
+
         if (body.attachment_file) {
             message.attachments = [{
                 path: `${config.BACK_END_URL}/uploads/${body.attachment_file}`
             }]
-
+            
         }
         transporter.sendMail(message).then((info) => {
             return {
@@ -40,4 +50,12 @@ module.exports = {
             return error
         })
     }
+}
+
+const convertToDate = (date) => {
+    const timestamp = new Date(date);
+    const date1 = timestamp.getDate();
+    const month = timestamp.toLocaleString('default', { month: 'long' });
+    const year = timestamp.getFullYear();
+    return `${date1}, ${month}-${year}`;
 }
