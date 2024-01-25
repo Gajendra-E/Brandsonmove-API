@@ -115,7 +115,7 @@ module.exports = {
                 <b>Greetings ${data.name}</b>
             </p>
             <p>
-                Thank you for your time and discussion. Paras Ji will contact you via 9899403232. Please have a look at the below document.
+                Thank you for your time and discussion. Please have a look at the below document.
             </p>
         `;
                 htmlContent = htmlContent + `
