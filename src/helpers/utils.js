@@ -96,7 +96,7 @@ module.exports = {
                 <b>Greetings ${data.name}</b>
             </p>
             <p>
-                Thank you for your kind interest. Your time slots are currently pre-engaged. We shall write to you shortly seeking another time and date for a meeting.
+                Thank you for your kind interest. Your time slots are currently pre-engaged. We shall write to you shortly seeking another time and date for a meeting writing back soon.
             </p>
         `;
                 htmlContent = htmlContent + `
