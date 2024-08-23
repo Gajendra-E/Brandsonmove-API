@@ -75,7 +75,7 @@ router.put('/:id', upload.single('file'), async function (req, res) {
         var tmp_path = null
 
         if (req.file != undefined || req.file != null) {
-            var tmp_path = req.file.filename;
+            var tmp_path = req.file.originalname;
         }
         let { heading1, heading2, heading3, paragraph_content } = req.body;
         let fetchContent = await db.Content.findOne({
