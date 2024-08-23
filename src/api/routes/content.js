@@ -11,7 +11,7 @@ const storageLocal = multer.diskStorage({
         cb(null, path.resolve(__dirname, '../../../uploads/'))
     },
     filename: function (req, file, cb) {
-        cb(null, file.fieldname + '-' + Date.now() + "" + path.extname(file.originalname))
+        cb(null, file.originalname)
     }
 })
 const upload = multer({ storage: storageLocal });
@@ -40,7 +40,7 @@ router.post('/', upload.single('file'), async function (req, res) {
     var tmp_path = null
 
     if (req.file != undefined || req.file != null) {
-        var tmp_path = req.file.filename;
+        var tmp_path = req.file.originalname;
     }
 
     try {
