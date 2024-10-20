@@ -75,11 +75,11 @@ module.exports = (sequelize, DataTypes) => {
     },
     gmail: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
     gmail_password: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
     status: {
       type: DataTypes.STRING,

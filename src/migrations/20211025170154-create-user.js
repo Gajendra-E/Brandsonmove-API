@@ -30,7 +30,7 @@ module.exports = {
       },
      gmail: {
         type: Sequelize.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       gmail_password: {
         type: Sequelize.STRING,
@@ -38,7 +38,7 @@ module.exports = {
       },
       status: {
         type: Sequelize.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       createdAt: {
         allowNull: false,
