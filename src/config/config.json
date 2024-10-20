@@ -1,9 +1,9 @@
 {
   "development": {
-    "username": "root",
-    "password": "",
-    "database": "brandsonmove_api_app_db",
-    "host": "127.0.0.1",
+    "username": "admin",
+    "password": "JUfZ3PFO8BHTcwpHTQuD",
+    "database": "brandsonmove_db",
+    "host": "brandsonmove-db.cfeigac8ykq4.ap-south-1.rds.amazonaws.com",
     "dialect": "mysql",
     "logging": false
   },
@@ -16,10 +16,10 @@
     "logging": false
   },
   "production": {
-    "username": "root",
-    "password": "",
-    "database": "brandsonmove_api_app_db",
-    "host": "127.0.0.1",
+    "username": "c35nmaarm9cfddmd",
+    "password": "cgocdayjukexvzrj",
+    "database": "k89trh9nccaw15z9",
+    "host": "xlf3ljx3beaucz9x.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
     "dialect": "mysql",
     "logging": false
   }

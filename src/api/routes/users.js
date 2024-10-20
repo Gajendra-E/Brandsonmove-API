@@ -46,7 +46,7 @@ router.get("/", async function (req, res, next) {
 router.post('/create', async function (req, res) {
 
     try {
-        const { name, phone_number, email, password } = req.body;
+        const { name, phone_number, email, password ,gmail,gmail_password} = req.body;
 
         let user_type = "ADM"
         let fetchUser = await db.User.findOne({
@@ -78,6 +78,8 @@ router.post('/create', async function (req, res) {
             phone_number: phone_number,
             email: email,
             password: password !== undefined && password !== null ? password : null,
+            gmail:gmail,
+            gmail_password:gmail_password,
             status: 'ACTIVE'
         });
 

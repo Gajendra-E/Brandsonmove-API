@@ -28,6 +28,14 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
+     gmail: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      gmail_password: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
       status: {
         type: Sequelize.STRING,
         allowNull: false,
