@@ -101,3 +101,15 @@ To run the application
 ====================================
     1.  > npm run build 
     2.  > npm start  
+
+
+
+
+    "development": {
+    "username": "admin",
+    "password": "JUfZ3PFO8BHTcwpHTQuD",
+    "database": "brandsonmove_db",
+    "host": "brandsonmove-db.cfeigac8ykq4.ap-south-1.rds.amazonaws.com",
+    "dialect": "mysql",
+    "logging": false
+  },

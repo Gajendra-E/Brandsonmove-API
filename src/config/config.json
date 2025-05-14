@@ -1,9 +1,9 @@
 {
   "development": {
-    "username": "admin",
-    "password": "JUfZ3PFO8BHTcwpHTQuD",
-    "database": "brandsonmove_db",
-    "host": "brandsonmove-db.cfeigac8ykq4.ap-south-1.rds.amazonaws.com",
+   "username": "root",
+    "password": "",
+    "database": "brandsonmove_api_app_db",
+    "host": "127.0.0.1",
     "dialect": "mysql",
     "logging": false
   },
